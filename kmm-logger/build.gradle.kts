@@ -4,7 +4,10 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("maven-publish")
+    id("signing")
 }
+
+apply{ from("$projectDir/publish.gradle") }
 
 group = "de.gal-digital"
 version = Version.logger
@@ -61,17 +64,5 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    }
-}
-publishing {
-    repositories {
-        maven {
-            name = "OSSRH"
-            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
-        }
     }
 }
