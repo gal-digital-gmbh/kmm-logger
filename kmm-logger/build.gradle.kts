@@ -1,10 +1,12 @@
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("maven-publish")
 }
 
-group = "de.galdigital.logger"
+group = "de.gal-digital"
 version = Version.logger
 
 repositories {
@@ -15,7 +17,9 @@ repositories {
 }
 
 kotlin {
-    android()
+    android {
+        publishLibraryVariants("release")
+    }
     ios()
     cocoapods {
         homepage = "https://www.gal-digital.de/"
@@ -52,5 +56,22 @@ android {
             isMinifyEnabled = false
         }
 
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+publishing {
+    repositories {
+        maven {
+            name = "OSSRH"
+            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
     }
 }
