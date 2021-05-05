@@ -64,7 +64,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
-println("sonatypeUsername: "+properties["sonatypeUsername"])
 publishing {
     repositories {
         maven {
@@ -72,7 +71,7 @@ publishing {
             url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
             credentials {
                 username = properties["sonatypeUsername"] as String?
-                password =  properties[".sonatypePassword"] as String?
+                password =  properties["sonatypePassword"] as String?
             }
         }
     }
