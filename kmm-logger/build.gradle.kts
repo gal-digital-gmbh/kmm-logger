@@ -7,8 +7,6 @@ plugins {
     id("signing")
 }
 
-apply{ from("$projectDir/publish.gradle") }
-
 group = "de.gal-digital"
 version = Version.logger
 
@@ -65,4 +63,20 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+}
+println("sonatypeUsername: "+properties["sonatypeUsername"])
+publishing {
+    repositories {
+        maven {
+            name = "OSSRH"
+            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = properties["sonatypeUsername"] as String?
+                password =  properties[".sonatypePassword"] as String?
+            }
+        }
+    }
+}
+signing {
+    sign(publishing.publications)
 }
