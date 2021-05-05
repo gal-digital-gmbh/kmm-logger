@@ -19,11 +19,13 @@ jobs:
         run: |
           chmod +x ./gradlew
           echo -n "$GPG_PRIVATE_KEY" | base64 --decode > ${GPG_RING_FILE}
+
+          SONATYPE_PASSWORD_ESCAPED=$(printf '%s\n' "$SONATYPE_PASSWORD" | sed -e 's/[\/&]/\\&/g')
           sed -i -e "s,sonatypeUsername=,sonatypeUsername=$SONATYPE_USERNAME,g" gradle.properties
-          sed -i -e "s,sonatypePassword=,sonatypePassword=$SONATYPE_PASSWORD,g" gradle.properties
+          sed -i -e "s,sonatypePassword=,sonatypePassword=$SONATYPE_PASSWORD_ESCAPED,g" gradle.properties
           sed -i -e "s,signing.keyId=,signing.keyId=$GPG_KEY_ID,g" gradle.properties
           sed -i -e "s,signing.password=,signing.password=$GPG_PASSWORD,g" gradle.properties
-          sed -i -e "s,signing.secretKeyRingFile=,signing.secretKeyRingFile=$GPG_PRIVATE_KEY,g" gradle.properties
+          sed -i -e "s,signing.secretKeyRingFile=,signing.secretKeyRingFile=$GPG_RING_FILE,g" gradle.properties
           ./gradlew build publish --warn --stacktrace
         env:
           GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
