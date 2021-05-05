@@ -78,17 +78,23 @@ publishing {
     }
     publications.withType<MavenPublication> {
         pom {
+            name.set("kmm-logger")
+            description.set("simple kotlin multiplatform logger")
+            url.set("https://github.com/gal-digital-gmbh/kmm-logger")
             licenses {
                 license {
                     name.set("MIT")
                     url.set("https://github.com/gal-digital-gmbh/kmm-logger/blob/main/LICENSE")
                 }
             }
+            organization {
+                name.set("GAL Digital GmbH")
+                url.set("https://www.gal-digital.de/")
+            }
             developers {
                 developer {
                     id.set("galdp")
                     name.set("Dimitri Pfaffenrodt")
-                    email.set("dimitri.pfaffenrodt@gal-digital.de")
                 }
             }
             scm {
