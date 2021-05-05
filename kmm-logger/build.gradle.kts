@@ -68,7 +68,7 @@ publishing {
     repositories {
         maven {
             name = "OSSRH"
-            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            url = uri(properties["sonatypeUrl"] as String)
             credentials {
                 username = properties["sonatypeUsername"] as String?
                 password =  properties["sonatypePassword"] as String?

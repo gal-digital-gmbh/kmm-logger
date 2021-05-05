@@ -21,6 +21,7 @@ jobs:
           echo -n "$GPG_PRIVATE_KEY" | base64 --decode > ${GPG_RING_FILE}
 
           SONATYPE_PASSWORD_ESCAPED=$(printf '%s\n' "$SONATYPE_PASSWORD" | sed -e 's/[\/&]/\\&/g')
+          sed -i -e "s,sonatypeUrl=,sonatypeUrl=$SONATYPE_URL,g" gradle.properties
           sed -i -e "s,sonatypeUsername=,sonatypeUsername=$SONATYPE_USERNAME,g" gradle.properties
           sed -i -e "s,sonatypePassword=,sonatypePassword=$SONATYPE_PASSWORD_ESCAPED,g" gradle.properties
           sed -i -e "s,signing.keyId=,signing.keyId=$GPG_KEY_ID,g" gradle.properties
@@ -32,5 +33,6 @@ jobs:
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
           GPG_RING_FILE: ${{ github.workspace }}/key.gpg
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          SONATYPE_URL: ${{ secrets.OSSRH_URL }}
           SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
