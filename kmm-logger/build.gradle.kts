@@ -65,7 +65,6 @@ android {
     }
 }
 val sonaTypeUrl = (properties["sonatypeUrl"] as String?)!!
-println("sonatypeUrl: $sonaTypeUrl")
 publishing {
     repositories {
         maven {
@@ -74,6 +73,26 @@ publishing {
             credentials {
                 username = properties["sonatypeUsername"] as String?
                 password =  properties["sonatypePassword"] as String?
+            }
+        }
+    }
+    publications.withType<MavenPublication> {
+        pom {
+            licenses {
+                license {
+                    name.set("MIT")
+                    url.set("https://github.com/gal-digital-gmbh/kmm-logger/blob/main/LICENSE")
+                }
+            }
+            developers {
+                developer {
+                    id.set("galdp")
+                    name.set("Dimitri Pfaffenrodt")
+                    email.set("dimitri.pfaffenrodt@gal-digital.de")
+                }
+            }
+            scm {
+                url.set("https://github.com/gal-digital-gmbh/kmm-logger")
             }
         }
     }
