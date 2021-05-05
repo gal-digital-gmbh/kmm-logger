@@ -64,11 +64,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
+val sonaTypeUrl = (properties["sonatypeUrl"] as String?)!!
+println("sonatypeUrl: $sonaTypeUrl")
 publishing {
     repositories {
         maven {
             name = "OSSRH"
-            url = uri(properties["sonatypeUrl"] as String)
+            url = uri(sonaTypeUrl)
             credentials {
                 username = properties["sonatypeUsername"] as String?
                 password =  properties["sonatypePassword"] as String?
