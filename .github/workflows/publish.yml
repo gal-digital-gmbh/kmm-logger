@@ -8,6 +8,7 @@ on:
 jobs:
   publish:
     runs-on: macos-latest
+    environment: "Maven Repository"
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-java@v1
