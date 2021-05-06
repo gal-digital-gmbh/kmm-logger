@@ -19,9 +19,11 @@ repositories {
 
 kotlin {
     android {
-        publishLibraryVariants("release")
+        publishLibraryVariants("debug", "release")
     }
+    jvm()
     ios()
+    js()
     cocoapods {
         homepage = "https://www.gal-digital.de/"
         summary = "kotlin multiplatform logger"
@@ -29,20 +31,15 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-            }
-        }
-        val androidMain by getting {
-            dependencies {
-                dependsOn(commonMain)
-            }
-        }
-        val iosMain by getting {
-            dependencies {
-                dependsOn(commonMain)
-            }
-        }
+        val commonMain by getting
+
+        val androidMain by getting
+
+        val jvmMain by getting
+
+        val iosMain by getting
+
+        val jsMain by getting
     }
 }
 android {
