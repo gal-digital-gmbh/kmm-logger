@@ -1,10 +1,10 @@
 
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
     id("com.android.library")
     id("maven-publish")
     id("signing")
+    id("org.jetbrains.dokka")
 }
 
 group = "de.gal-digital"
@@ -24,11 +24,6 @@ kotlin {
     jvm()
     ios()
     js()
-    cocoapods {
-        homepage = "https://www.gal-digital.de/"
-        summary = "kotlin multiplatform logger"
-        frameworkName = "logger"
-    }
 
     sourceSets {
         val commonMain by getting
@@ -61,6 +56,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
+
+tasks {
+    create<Jar>("javadocJar") {
+        archiveClassifier.set("javadoc")
+        dependsOn(dokkaHtml)
+        from(dokkaHtml.get().outputDirectory)
+    }
+}
 val sonaTypeUrl = (properties["sonatypeUrl"] as String?)!!
 publishing {
     repositories {
@@ -74,6 +77,9 @@ publishing {
         }
     }
     publications.withType<MavenPublication> {
+        if (name == "jvm") {
+            artifact(tasks["javadocJar"])
+        }
         pom {
             name.set("kmm-logger")
             description.set("simple kotlin multiplatform logger")

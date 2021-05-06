@@ -5,11 +5,11 @@ buildscript {
         gradlePluginPortal()
         google()
         mavenCentral()
-        jcenter()
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlin}")
         classpath("com.android.tools.build:gradle:4.2.0")
+        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.32")
     }
 }
 
@@ -17,10 +17,10 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
     }
 }
 
 tasks.create<Delete>("clean") {
     delete = setOf(rootProject.buildDir)
 }
+
