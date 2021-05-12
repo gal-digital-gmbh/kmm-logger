@@ -10,12 +10,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("de.gal-digital:kmm-logger:x.x.x")
+                api("de.gal-digital:kmm-logger:x.x.x")
             }
         }
     }
 }
 ```
+
+use `implementation` instead of `api` if you don't want logger to be public from your shared module
 
 ## usage
 
