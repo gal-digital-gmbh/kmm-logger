@@ -8,12 +8,11 @@ plugins {
 }
 
 group = "de.gal-digital"
-version = Version.logger
+version = "1.1.0"
 
 repositories {
     gradlePluginPortal()
     google()
-    jcenter()
     mavenCentral()
 }
 
@@ -22,7 +21,13 @@ kotlin {
         publishLibraryVariants("debug", "release")
     }
     jvm()
-    ios()
+    ios {
+        binaries {
+            framework {
+                baseName = "Logger"
+            }
+        }
+    }
     js()
 
     sourceSets {
@@ -38,11 +43,11 @@ kotlin {
     }
 }
 android {
-    compileSdkVersion(Version.Android.targetSdk)
+    compileSdkVersion(30)
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(Version.Android.minSdk)
-        targetSdkVersion(Version.Android.targetSdk)
+        minSdkVersion(16)
+        targetSdkVersion(30)
     }
     buildTypes {
         getByName("release") {
