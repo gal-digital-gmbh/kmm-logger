@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "de.gal-digital"
-version = Version.logger
+version = "1.1.0"
 
 repositories {
     gradlePluginPortal()
@@ -43,11 +43,11 @@ kotlin {
     }
 }
 android {
-    compileSdkVersion(Version.Android.targetSdk)
+    compileSdkVersion(30)
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(Version.Android.minSdk)
-        targetSdkVersion(Version.Android.targetSdk)
+        minSdkVersion(16)
+        targetSdkVersion(30)
     }
     buildTypes {
         getByName("release") {

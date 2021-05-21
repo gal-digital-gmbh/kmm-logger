@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="11">
+      <module name="kmm-logger.kmm-logger.commonMain" target="1.8" />
+      <module name="kmm-logger.kmm-logger.commonTest" target="1.8" />
+      <module name="kmm-logger.kmm-logger.jvmMain" target="1.8" />
+      <module name="kmm-logger.kmm-logger.jvmTest" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
