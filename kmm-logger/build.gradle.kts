@@ -13,7 +13,6 @@ version = Version.logger
 repositories {
     gradlePluginPortal()
     google()
-    jcenter()
     mavenCentral()
 }
 
@@ -22,7 +21,13 @@ kotlin {
         publishLibraryVariants("debug", "release")
     }
     jvm()
-    ios()
+    ios {
+        binaries {
+            framework {
+                baseName = "Logger"
+            }
+        }
+    }
     js()
 
     sourceSets {

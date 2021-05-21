@@ -10,15 +10,15 @@ interface Loggable {
     val loggerTag: String
         get() = this::class.tag()
 
-    fun Loggable.info(message: String) {
-        info(message,loggerTag)
+    fun info(message: String) {
+        info(message, loggerTag)
     }
 
-    fun Loggable.debug(message: String) {
-        debug(message,loggerTag)
+    fun debug(message: String) {
+        debug(message, loggerTag)
     }
 
-    fun Loggable.error(message: String, throwable: Throwable? = null) {
+    fun error(message: String, throwable: Throwable? = null) {
         logError(message, throwable, loggerTag)
     }
 
@@ -30,9 +30,3 @@ interface Loggable {
         }
     }
 }
-
-expect fun info(message: String, loggerTag: String = "logger")
-
-expect fun debug(message: String, loggerTag: String = "logger")
-
-expect fun logError(message: String, throwable: Throwable? = null, loggerTag: String = "logger")
