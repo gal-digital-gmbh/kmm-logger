@@ -25,6 +25,30 @@ kotlin {
 }
 ```
 
+or in cocoapods since kotlin 1.5.30
+```kotlin
+kotlin {
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                api("de.gal-digital:kmm-logger:x.x.x")
+            }
+        }
+    }
+}
+cocoapods {
+    framework {
+        // Dynamic framework support
+        isStatic = false
+        // Dependency export
+        export("de.gal-digital:kmm-logger:x.x.x")
+        transitiveExport = true
+        // Bitcode embedding
+        embedBitcode(BITCODE)
+    }
+}
+```
+
 use `implementation` instead of `api` if you don't want logger to be public from your shared module
 
 ## usage
